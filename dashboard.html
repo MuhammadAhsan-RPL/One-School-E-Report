@@ -19,10 +19,6 @@
             progress: '#f59e0b',
             done: '#10b981',
             light: '#f8fafc'
-          },
-          boxShadow: {
-            card: '0 4px 12px -2px rgba(0,0,0,0.04)',
-            cardHover: '0 6px 16px -2px rgba(14,165,233,0.12)'
           }
         }
       }
@@ -36,14 +32,12 @@
       font-weight: 600;
     }
     .report-card {
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       border: 1px solid #e2e8f0;
       background: white;
-    }
-    .report-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--tw-shadow-cardHover);
-      border-color: #cbd5e1;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
     }
     .category-icon {
       width: 28px;
@@ -53,222 +47,207 @@
       align-items: center;
       justify-content: center;
       font-size: 0.8rem;
+      font-weight: bold;
     }
-    /* Placeholder saat loading */
-    .loading-placeholder {
+    .empty-text {
       color: #94a3b8;
       font-style: italic;
-      padding: 1rem 0;
+      padding: 0.5rem 0;
     }
   </style>
 </head>
 <body class="bg-gray-50 text-slate-800">
   <!-- Header -->
-  <header class="bg-white shadow-sm sticky top-0 z-10">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <div>
-        <div class="text-xl font-bold text-primary">One School E-Report</div>
-        <div class="text-xs text-slate-500">Dashboard Transparansi Publik</div>
-      </div>
-      <a href="report.html" class="px-5 py-2.5 bg-accent hover:bg-sky-600 text-white font-medium rounded-lg text-sm shadow transition">
-        + Kirim Laporan
-      </a>
+  <header class="bg-white shadow-sm py-4">
+  <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+    <div>
+      <div class="text-xl font-bold text-primary">One School E-Report</div>
+      <div class="text-sm text-slate-500">Dashboard Transparansi Publik</div>
     </div>
-  </header>
+    <a href="report.html" class="px-5 py-2.5 bg-accent hover:bg-sky-600 text-white font-medium rounded-lg text-sm shadow transition">
+      + Kirim Laporan
+    </a>
+  </div>
+</header>
 
-  <!-- Hero Banner -->
+  <!-- Hero -->
   <section class="bg-gradient-to-r from-sky-50 to-blue-50 py-8 border-b">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <h1 class="text-2xl md:text-3xl font-bold text-primary">Semua Laporan Publik</h1>
-      <p class="mt-2 text-slate-600 max-w-2xl mx-auto">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h1 class="text-2xl font-bold text-primary">Semua Laporan Publik</h1>
+      <p class="mt-2 text-slate-600">
         Transparansi adalah fondasi kepercayaan. Semua laporan (kecuali data sensitif) ditampilkan di sini.
       </p>
     </div>
   </section>
 
-  <!-- Stats Summary -->
-  <section class="py-6 bg-white border-b">
-    <div class="max-w-4xl mx-auto px-4">
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
-        <div class="p-4 rounded-xl bg-pending/5 border border-pending/20">
-          <div id="count-belum" class="text-lg font-bold text-pending">0</div>
-          <div class="text-xs text-slate-600 mt-1">Belum Ditanggapi</div>
-        </div>
-        <div class="p-4 rounded-xl bg-progress/5 border border-progress/20">
-          <div id="count-proses" class="text-lg font-bold text-progress">0</div>
-          <div class="text-xs text-slate-600 mt-1">Sedang Diproses</div>
-        </div>
-        <div class="p-4 rounded-xl bg-done/5 border border-done/20">
-          <div id="count-selesai" class="text-lg font-bold text-done">0</div>
-          <div class="text-xs text-slate-600 mt-1">Selesai</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Reports Section -->
   <main class="max-w-4xl mx-auto px-4 py-8">
 
-    <!-- Belum Ditanggapi -->
+    <!-- Belum Ditanggapi (Kosong) -->
     <section class="mb-12">
       <div class="flex items-center gap-2 mb-5">
         <span class="w-3 h-3 rounded-full bg-pending"></span>
         <h2 class="text-lg font-semibold text-pending">Belum Ditanggapi</h2>
       </div>
-      <div id="list-belum" class="space-y-5">
-        <div class="loading-placeholder">Tidak ada laporan.</div>
+      <div id="belum" class="space-y-5">
+        <div class="empty-text">Belum ada laporan baru.</div>
       </div>
     </section>
 
-    <!-- Sedang Diproses -->
+    <!-- Sedang Diproses (Contoh Statis) -->
     <section class="mb-12">
       <div class="flex items-center gap-2 mb-5">
         <span class="w-3 h-3 rounded-full bg-progress"></span>
         <h2 class="text-lg font-semibold text-progress">Sedang Diproses</h2>
       </div>
-      <div id="list-proses" class="space-y-5">
-        <div class="loading-placeholder">Tidak ada laporan.</div>
+      <div class="space-y-5">
+        <div class="report-card">
+          <div class="flex gap-4">
+            <div class="category-icon bg-progress/10 text-progress">🚻</div>
+            <div class="flex-1">
+              <p class="text-slate-800">Toilet laki-laki di lantai 2 bau dan tidak ada air.</p>
+              <div class="mt-2 text-sm text-slate-700 bg-blue-50 p-2 rounded-lg">
+                <span class="font-medium">Respons Guru:</span> "Dalam pengecekan oleh tim fasilitas – estimasi selesai 3 Des."
+              </div>
+              <div class="mt-3 flex justify-between items-center text-xs text-slate-500">
+                <span>Ditanggapi oleh: Pak Rudi (Tim Fasilitas)</span>
+                <span>1 Des 2025</span>
+              </div>
+            </div>
+            <span class="status-badge bg-progress/10 text-progress">Sedang Diproses</span>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Selesai -->
+    <!-- Selesai (Contoh Statis) -->
     <section>
       <div class="flex items-center gap-2 mb-5">
         <span class="w-3 h-3 rounded-full bg-done"></span>
         <h2 class="text-lg font-semibold text-done">Selesai</h2>
       </div>
-      <div id="list-selesai" class="space-y-5">
-        <div class="loading-placeholder">Tidak ada laporan.</div>
+      <div class="space-y-5">
+        <div class="report-card">
+          <div class="flex gap-4">
+            <div class="category-icon bg-done/10 text-done">❄️</div>
+            <div class="flex-1">
+              <p class="text-slate-800">AC di ruang guru tidak dingin, sudah diperbaiki hari ini.</p>
+              <div class="mt-2 text-sm text-slate-700 bg-green-50 p-2 rounded-lg">
+                <span class="font-medium">Respons Guru:</span> "Perbaikan selesai pukul 10.00 WIB. Terima kasih laporannya!"
+              </div>
+              <div class="mt-3 flex justify-between items-center text-xs text-slate-500">
+                <span>Ditanggapi oleh: Pak Doni (Tim Fasilitas)</span>
+                <span>30 Nov 2025</span>
+              </div>
+            </div>
+            <span class="status-badge bg-done/10 text-done">Selesai</span>
+          </div>
+        </div>
+
+        <div class="report-card">
+          <div class="flex gap-4">
+            <div class="category-icon bg-done/10 text-done">💡</div>
+            <div class="flex-1">
+              <p class="text-slate-800">Saran: Tambah jam istirahat agar siswa tidak kelelahan.</p>
+              <div class="mt-2 text-sm text-slate-700 bg-green-50 p-2 rounded-lg">
+                <span class="font-medium">Respons Kepala Sekolah:</span> "Akan kami diskusikan di rapat minggu depan. Terima kasih!"
+              </div>
+              <div class="mt-3 flex justify-between items-center text-xs text-slate-500">
+                <span>Ditanggapi oleh: Ibu Maya (Kepala Sekolah)</span>
+                <span>28 Nov 2025</span>
+              </div>
+            </div>
+            <span class="status-badge bg-done/10 text-done">Selesai</span>
+          </div>
+        </div>
       </div>
     </section>
 
   </main>
 
-  <!-- Footer -->
   <footer class="py-6 text-center text-xs text-slate-500 border-t bg-white">
     &copy; 2025 One School E-Report • Transparansi untuk lingkungan belajar yang lebih baik
   </footer>
 
-  <!-- Firebase SDK -->
+  <!-- Firebase hanya untuk bagian "Belum Ditanggapi" (opsional, bisa dihapus) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
   <script>
-    // 🔑 Konfigurasi Firebase-mu
-    const firebaseConfig = {
-      apiKey: "AIzaSyDxWgtqspZpE-xZFVyjmZPQeAyp2gl9sl4",
-      authDomain: "one-school-e-report.firebaseapp.com",
-      projectId: "one-school-e-report",
-      storageBucket: "one-school-e-report.firebasestorage.app",
-      messagingSenderId: "533085737086",
-      appId: "1:533085737086:web:3b13c6c803ba992559882f"
+  // 🔑 Konfigurasi Firebase (tetap sama)
+  const firebaseConfig = {
+    apiKey: "AIzaSyDxWgtqspZpE-xZFVyjmZPQeAyp2gl9sl4",
+    authDomain: "one-school-e-report.firebaseapp.com",
+    projectId: "one-school-e-report",
+    storageBucket: "one-school-e-report.firebasestorage.app",
+    messagingSenderId: "533085737086",
+    appId: "1:533085737086:web:3b13c6c803ba992559882f"
+  };
+
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
+
+  // 🔒 Daftar kata kasar (bisa ditambah sesuai kebutuhan)
+  const kataKasar = [
+    "anjing", "babi", "bangsat", "bajingan", "kontol", "memek", "pepek", "ngentot",
+    "jancok", "asu", "anjeng", "goblok", "tolol", "idiot", "bego", "bodoh",
+    "p*orn", "seks", "fuck", "shit", "bitch", "asshole", "crap"
+    // Tambahkan kata lain jika perlu
+  ];
+
+  // Fungsi: periksa apakah teks mengandung kata kasar (case-insensitive)
+  function mengandungKataKasar(teks) {
+    const teksRendah = teks.toLowerCase();
+    return kataKasar.some(kata => {
+      // Gunakan regex untuk cek dalam kata (misal: "goblok" di "kamu goblok banget")
+      const regex = new RegExp(`\\b${kata.replace(/\*/g, "\\w*")}\\b`, "i");
+      return regex.test(teksRendah);
+    });
+  }
+
+  // Tangani pengiriman form
+  document.getElementById("reportForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const content = document.getElementById("content").value.trim();
+    if (!content) {
+      alert("Isi laporan tidak boleh kosong!");
+      return;
+    }
+
+    // 🔍 Periksa keamanan: apakah ada kata kasar?
+    if (mengandungKataKasar(content)) {
+      // ⚠️ Jika ada kata kasar → langsung redirect!
+      alert("Laporan mengandung kata tidak sopan. Anda akan dialihkan.");
+      window.location.href = "index.html"; // atau halaman lain, misal: "error.html"
+      return;
+    }
+
+    // ✅ Jika aman, kirim ke Firebase
+    const isAnonymous = document.getElementById("anonymous").checked;
+    const report = {
+      status: "Belum Ditanggapi",
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+      content: content
     };
 
-    // Initialize
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-
-    // Format tanggal: 2 Des 2025
-    function formatDate(timestamp) {
-      if (!timestamp) return "Baru saja";
-      const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
-      return date.toLocaleDateString('id-ID', {
-        day: 'numeric',
-        month: 'short',
-        year: 'numeric'
-      });
+    if (!isAnonymous) {
+      report.role = document.getElementById("role").value || "Tidak disebutkan";
+      report.name = document.getElementById("name").value || null;
+      report.class = document.getElementById("class").value || null;
+      report.category = document.getElementById("category").value || "Lainnya";
     }
 
-    // Render satu laporan
-    function renderReport(data) {
-      const content = data.content || "Laporan tanpa isi";
-      const category = data.category || "Lainnya";
-      const createdAt = formatDate(data.createdAt);
-      const status = data.status;
-
-      // Icon berdasarkan kategori (sederhana)
-      let icon = "📝";
-      if (category.includes("Fasilitas")) icon = "❗";
-      else if (category.includes("Toilet") || category.includes("WC")) icon = "🚻";
-      else if (category.includes("AC") || category.includes("Listrik")) icon = "⚡";
-      else if (category.includes("Saran")) icon = "💡";
-      else if (category.includes("Perilaku")) icon = "⚠️";
-
-      // Respons guru (opsional)
-      const responseHtml = data.response ? 
-        `<div class="mt-2 text-sm text-slate-700 bg-${status === "Sedang Diproses" ? "blue" : "green"}-50 p-2 rounded-lg">
-          <span class="font-medium">Respons ${data.responder ? data.responder : "Guru"}:</span> "${data.response}"
-        </div>` : '';
-
-      // Info penanggap
-      const responderInfo = data.responder && data.responseAt ? 
-        `<div class="mt-3 flex justify-between items-center text-xs text-slate-500">
-          <span>Ditanggapi oleh: ${data.responder}</span>
-          <span>${formatDate(data.responseAt)}</span>
-        </div>` : 
-        `<div class="mt-3 flex justify-between items-center text-xs text-slate-500">
-          <span>Kategori: ${category}</span>
-          <span>Dikirim: ${createdAt}</span>
-        </div>`;
-
-      return `
-        <div class="report-card p-5 rounded-xl shadow-sm">
-          <div class="flex gap-4">
-            <div class="category-icon bg-${status === "Belum Ditanggapi" ? "pending" : status === "Sedang Diproses" ? "progress" : "done"}/10 text-${status === "Belum Ditanggapi" ? "pending" : status === "Sedang Diproses" ? "progress" : "done"}">${icon}</div>
-            <div class="flex-1">
-              <p class="text-slate-800">${content}</p>
-              ${responseHtml}
-              ${responderInfo}
-            </div>
-            <span class="status-badge bg-${status === "Belum Ditanggapi" ? "pending" : status === "Sedang Diproses" ? "progress" : "done"}/10 text-${status === "Belum Ditanggapi" ? "pending" : status === "Sedang Diproses" ? "progress" : "done"}">${status}</span>
-          </div>
-        </div>
-      `;
-    }
-
-    // Render semua laporan berdasarkan status
-    function renderAllReports(snapshot) {
-      const belum = document.getElementById("list-belum");
-      const proses = document.getElementById("list-proses");
-      const selesai = document.getElementById("list-selesai");
-
-      let countBelum = 0, countProses = 0, countSelesai = 0;
-      let htmlBelum = "", htmlProses = "", htmlSelesai = "";
-
-      snapshot.forEach(doc => {
-        const data = doc.data();
-        const item = renderReport(data);
-
-        if (data.status === "Belum Ditanggapi") {
-          htmlBelum += item;
-          countBelum++;
-        } else if (data.status === "Sedang Diproses") {
-          htmlProses += item;
-          countProses++;
-        } else if (data.status === "Selesai") {
-          htmlSelesai += item;
-          countSelesai++;
-        }
+    db.collection("reports").add(report)
+      .then(() => {
+        alert("✅ Laporan berhasil dikirim!\nTerima kasih atas partisipasi Anda.");
+        document.getElementById("reportForm").reset();
+        document.getElementById("anonymous").checked = false;
+      })
+      .catch(err => {
+        console.error(err);
+        alert("❌ Gagal mengirim laporan. Coba lagi nanti.");
       });
-
-      // Update daftar
-      belum.innerHTML = htmlBelum || '<div class="loading-placeholder">Tidak ada laporan.</div>';
-      proses.innerHTML = htmlProses || '<div class="loading-placeholder">Tidak ada laporan.</div>';
-      selesai.innerHTML = htmlSelesai || '<div class="loading-placeholder">Tidak ada laporan.</div>';
-
-      // Update statistik
-      document.getElementById("count-belum").textContent = countBelum;
-      document.getElementById("count-proses").textContent = countProses;
-      document.getElementById("count-selesai").textContent = countSelesai;
-    }
-
-    // Dengarkan perubahan real-time
-    db.collection("reports")
-      .orderBy("createdAt", "desc")
-      .onSnapshot(renderAllReports, err => {
-        console.error("Gagal memuat laporan:", err);
-        alert("Gagal memuat laporan. Periksa koneksi internet Anda.");
-      });
-  </script>
+  });
+</script>
 </body>
 </html>
