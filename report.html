@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kirim Laporan – One School E-Report</title>
+  <!-- TAILWIND CDN (TANPA SPASI!) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
@@ -19,6 +20,9 @@
       }
     }
   </script>
+  <style>
+    body { background-color: #f9fafb; }
+  </style>
 </head>
 <body class="bg-gray-50">
   <header class="bg-white shadow-sm">
@@ -89,11 +93,12 @@
     &copy; 2025 One School E-Report. Laporan Anda dilindungi kerahasiaannya.
   </footer>
 
-  <!-- Firebase SDK (SUDAH BENAR, TANPA SPASI!) -->
+  <!-- F I R E B A S E   S D K   ( T A N P A   S P A S I ! ) -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
   <script>
+    // 🔑 CONFIG FIREBASE-MU (SUDAH BENAR!)
     const firebaseConfig = {
       apiKey: "AIzaSyDxWgtqspZpE-xZFVyjmZPQeAyp2gl9sl4",
       authDomain: "one-school-e-report.firebaseapp.com",
@@ -103,15 +108,16 @@
       appId: "1:533085737086:web:3b13c6c803ba992559882f"
     };
 
+    // 🔥 INISIALISASI
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
+    // 📤 KIRIM LAPORAN
     document.getElementById("reportForm").addEventListener("submit", function(e) {
       e.preventDefault();
-
       const content = document.getElementById("content").value.trim();
       if (!content) {
-        alert("Isi laporan tidak boleh kosong!");
+        alert("❗ Isi laporan tidak boleh kosong!");
         return;
       }
 
@@ -131,13 +137,13 @@
 
       db.collection("reports").add(report)
         .then(() => {
-          alert("✅ Laporan berhasil dikirim!\nTerima kasih atas partisipasi Anda.");
+          alert("✅ Laporan berhasil dikirim!\nTerima kasih!");
           document.getElementById("reportForm").reset();
           document.getElementById("anonymous").checked = false;
         })
         .catch(err => {
-          console.error(err);
-          alert("❌ Gagal mengirim laporan. Coba lagi nanti.");
+          console.error("Error:", err);
+          alert("❌ Gagal mengirim. Periksa koneksi internet Anda.");
         });
     });
   </script>
