@@ -4,8 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kirim Laporan – One School E-Report</title>
-  <!-- TAILWIND CDN (TANPA SPASI!) -->
+  <!-- ✅ Perbaikan: HAPUS SPASI di akhir URL -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- ✅ Perbaikan: HAPUS SPASI di nama font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
@@ -20,9 +21,6 @@
       }
     }
   </script>
-  <style>
-    body { background-color: #f9fafb; }
-  </style>
 </head>
 <body class="bg-gray-50">
   <header class="bg-white shadow-sm">
@@ -93,86 +91,56 @@
     &copy; 2025 One School E-Report. Laporan Anda dilindungi kerahasiaannya.
   </footer>
 
-  <!-- F I R E B A S E   S D K   ( T A N P A   S P A S I ! ) -->
+  <!-- ✅ Perbaikan: HAPUS SPASI di akhir setiap URL -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
   <script>
-  // 🔑 Konfigurasi Firebase (tetap sama)
-  const firebaseConfig = {
-    apiKey: "AIzaSyDxWgtqspZpE-xZFVyjmZPQeAyp2gl9sl4",
-    authDomain: "one-school-e-report.firebaseapp.com",
-    projectId: "one-school-e-report",
-    storageBucket: "one-school-e-report.firebasestorage.app",
-    messagingSenderId: "533085737086",
-    appId: "1:533085737086:web:3b13c6c803ba992559882f"
-  };
-
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.firestore();
-
-  // 🔒 Daftar kata kasar (bisa ditambah sesuai kebutuhan)
-  const kataKasar = [
-    "anjing", "babi", "bangsat", "bajingan", "kontol", "memek", "pepek", "ngentot",
-    "jancok", "asu", "anjeng", "goblok", "tolol", "idiot", "bego", "bodoh",
-    "p*orn", "seks", "fuck", "shit", "bitch", "asshole", "crap"
-    // Tambahkan kata lain jika perlu
-  ];
-
-  // Fungsi: periksa apakah teks mengandung kata kasar (case-insensitive)
-  function mengandungKataKasar(teks) {
-    const teksRendah = teks.toLowerCase();
-    return kataKasar.some(kata => {
-      // Gunakan regex untuk cek dalam kata (misal: "goblok" di "kamu goblok banget")
-      const regex = new RegExp(`\\b${kata.replace(/\*/g, "\\w*")}\\b`, "i");
-      return regex.test(teksRendah);
-    });
-  }
-
-  // Tangani pengiriman form
-  document.getElementById("reportForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-    const content = document.getElementById("content").value.trim();
-    if (!content) {
-      alert("Isi laporan tidak boleh kosong!");
-      return;
-    }
-
-    // 🔍 Periksa keamanan: apakah ada kata kasar?
-    if (mengandungKataKasar(content)) {
-      // ⚠️ Jika ada kata kasar → langsung redirect!
-      alert("Laporan mengandung kata tidak sopan. Anda akan dialihkan.");
-      window.location.href = "index.html"; // atau halaman lain, misal: "error.html"
-      return;
-    }
-
-    // ✅ Jika aman, kirim ke Firebase
-    const isAnonymous = document.getElementById("anonymous").checked;
-    const report = {
-      status: "Belum Ditanggapi",
-      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      content: content
+    const firebaseConfig = {
+      apiKey: "AIzaSyDxWgtqspZpE-xZFVyjmZPQeAyp2gl9sl4",
+      authDomain: "one-school-e-report.firebaseapp.com",
+      projectId: "one-school-e-report",
+      storageBucket: "one-school-e-report.firebasestorage.app",
+      messagingSenderId: "533085737086",
+      appId: "1:533085737086:web:3b13c6c803ba992559882f"
     };
 
-    if (!isAnonymous) {
-      report.role = document.getElementById("role").value || "Tidak disebutkan";
-      report.name = document.getElementById("name").value || null;
-      report.class = document.getElementById("class").value || null;
-      report.category = document.getElementById("category").value || "Lainnya";
-    }
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
 
-    db.collection("reports").add(report)
-      .then(() => {
-        alert("✅ Laporan berhasil dikirim!\nTerima kasih atas partisipasi Anda.");
-        document.getElementById("reportForm").reset();
-        document.getElementById("anonymous").checked = false;
-      })
-      .catch(err => {
-        console.error(err);
-        alert("❌ Gagal mengirim laporan. Coba lagi nanti.");
-      });
-  });
-</script>
+    document.getElementById("reportForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const content = document.getElementById("content").value.trim();
+      if (!content) {
+        alert("Isi laporan tidak boleh kosong!");
+        return;
+      }
+
+      const isAnonymous = document.getElementById("anonymous").checked;
+      const report = {
+        status: "Belum Ditanggapi",
+        createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+        content: content
+      };
+
+      if (!isAnonymous) {
+        report.role = document.getElementById("role").value || "Tidak disebutkan";
+        report.name = document.getElementById("name").value || null;
+        report.class = document.getElementById("class").value || null;
+        report.category = document.getElementById("category").value || "Lainnya";
+      }
+
+      db.collection("reports").add(report)
+        .then(() => {
+          alert("✅ Laporan berhasil dikirim!\nTerima kasih atas partisipasi Anda.");
+          document.getElementById("reportForm").reset();
+          document.getElementById("anonymous").checked = false;
+        })
+        .catch(err => {
+          console.error(err);
+          alert("❌ Gagal mengirim laporan. Coba lagi nanti.");
+        });
+    });
+  </script>
 </body>
 </html>
