@@ -1,77 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<<<<<<< HEAD
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard – One School E-Report</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9fafb;
-      margin: 0;
-      padding: 20px;
-    }
-    .container {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    h1 {
-      text-align: center;
-      color: #0f172a;
-      margin-bottom: 24px;
-    }
-    .section {
-      margin-bottom: 32px;
-    }
-    .section h2 {
-      color: #0f172a;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .section h2.pending { color: #f97316; }
-    .section h2.process { color: #f59e0b; }
-    .section h2.done { color: #10b981; }
-    .report {
-      background: white;
-      padding: 16px;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-    .empty {
-      color: #94a3b8;
-      font-style: italic;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>Dashboard Laporan</h1>
-
-    <div class="section">
-      <h2 class="pending">🟡 Belum Ditanggapi</h2>
-      <div id="belum">
-        <div class="empty">Belum ada laporan baru.</div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2 class="process">🟠 Sedang Diproses</h2>
-      <div class="report">Toilet laki-laki di lantai 2 bau dan tidak ada air.</div>
-    </div>
-
-    <div class="section">
-      <h2 class="done">🟢 Selesai</h2>
-      <div class="report">AC di ruang guru tidak dingin, sudah diperbaiki.</div>
-      <div class="report">Saran: Tambah jam istirahat agar siswa tidak kelelahan.</div>
-    </div>
-  </div>
-
-  <!-- Firebase -->
-=======
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dashboard Laporan – One School E-Report</title>
@@ -235,9 +164,9 @@
   </footer>
 
   <!-- Firebase hanya untuk bagian "Belum Ditanggapi" (opsional, bisa dihapus) -->
->>>>>>> b298954 (update dari VS Code)
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
   <script>
     // Jika kamu ingin bagian "Belum Ditanggapi" tetap bisa terisi saat ada laporan,
     // biarkan kode Firebase ini. Jika tidak, hapus saja seluruh blok script ini.
@@ -250,30 +179,16 @@
       messagingSenderId: "533085737086",
       appId: "1:533085737086:web:3b13c6c803ba992559882f"
     };
+
     firebase.initializeApp(firebaseConfig);
     const db = firebase.firestore();
 
-<<<<<<< HEAD
-    // Ambil laporan "Belum Ditanggapi"
-=======
     // Tampilkan hanya laporan dengan status "Belum Ditanggapi"
->>>>>>> b298954 (update dari VS Code)
     db.collection("reports")
       .where("status", "==", "Belum Ditanggapi")
       .orderBy("createdAt", "desc")
       .onSnapshot(snapshot => {
         const belum = document.getElementById("belum");
-<<<<<<< HEAD
-        belum.innerHTML = "";
-        if (snapshot.empty) {
-          belum.innerHTML = '<div class="empty">Belum ada laporan baru.</div>';
-          return;
-        }
-        snapshot.forEach(doc => {
-          const div = document.createElement("div");
-          div.className = "report";
-          div.textContent = doc.data().content;
-=======
         belum.innerHTML = ""; // kosongkan dulu
 
         if (snapshot.empty) {
@@ -298,7 +213,6 @@
               <span class="status-badge bg-pending/10 text-pending">Belum Ditanggapi</span>
             </div>
           `;
->>>>>>> b298954 (update dari VS Code)
           belum.appendChild(div);
         });
       });
