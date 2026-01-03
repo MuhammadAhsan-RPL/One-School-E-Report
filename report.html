@@ -84,3 +84,44 @@
       </form>
     </div>
   </main>
+  <!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyDxWgtqspZpE-xZFVyjmZPQeAyp2gl9sl4",
+  authDomain: "one-school-e-report.firebaseapp.com",
+  projectId: "one-school-e-report",
+  storageBucket: "one-school-e-report.appspot.com",
+  messagingSenderId: "533085737086",
+  appId: "1:533085737086:web:3b13c6c803ba992559882f"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+document.getElementById("reportForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  db.collection("reports").add({
+    role: role.value,
+    name: name.value,
+    class: document.getElementById("class").value,
+    category: category.value,
+    content: content.value,
+    anonymous: anonymous.checked,
+    status: "Belum Ditanggapi",
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  }).then(() => {
+    alert("Laporan berhasil dikirim ✅");
+    this.reset();
+  }).catch(err => {
+    alert("Gagal kirim laporan ❌");
+    console.error(err);
+  });
+});
+</script>
+
+</body>
+</html>
