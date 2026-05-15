@@ -1,40 +1,66 @@
 # 🏫 OneSchool E-Report
 
-OneSchool E-Report is a digital reporting platform designed for students and parents to submit reports easily, securely, and transparently.  
-This platform supports public accountability through a real-time dashboard.
+OneSchool E-Report is a digital reporting platform for students and parents to submit reports securely and transparently.
 
-## 🌐 Live Website
-- **Main Website**  
-  https://one-school-e-report.vercel.app/index.html
+🌐 Live Demo  
+https://one-school-e-report.vercel.app/index.html
+
+📂 Repository  
+https://github.com/MuhammadAhsan-RPL/One-School-E-Report
+
+---
 
 ## ✨ Features
-- Secure and anonymous report submission  
-- Real-time report status updates  
-- Public transparency dashboard  
-- Simple, clean, and user-friendly interface  
-- Accessible on desktop and mobile devices  
 
-## 🧑‍🎓 Target Users
-- Students  
-- Parents  
-- School administrators  
+- Anonymous report submission
+- Real-time report updates
+- Public transparency dashboard
+- Responsive design
+- Clean and user-friendly UI
+
+---
 
 ## 🛠️ Tech Stack
-- HTML  
-- CSS  
-- JavaScript  
-- Tailwind CSS  
-- Firebase (Realtime Database / Firestore)
 
-## 🚀 Deployment Status
-✔️ Production — Deployed on **Vercel**
+### 🌐 Frontend
 
-## 📌 Project Purpose
-This project was created to:
-- Encourage transparency in school environments  
-- Provide a safe reporting channel for students and parents  
-- Practice real-world web development using modern tools  
+<p>
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"/>
+</p>
 
-## 📂 Repository
-- **GitHub Repository**  
-  https://github.com/MuhammadAhsan-RPL/One-School-E-Report
+### 🔥 Backend & Database
+
+<p>
+  <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black"/>
+</p>
+
+### 🚀 Deployment
+
+<p>
+  <img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white"/>
+</p>
+
+### 🧰 Tools
+
+<p>
+  <img src="https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white"/>
+  <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white"/>
+  <img src="https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white"/>
+</p>
+
+---
+
+## 📌 Purpose
+
+- Encourage school transparency
+- Provide safe reporting access
+- Practice modern web development
+
+---
+
+## 👨‍💻 Developer
+
+Made with ❤️ by Muhammad Ahsan
